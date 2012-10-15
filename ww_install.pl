@@ -1063,12 +1063,12 @@ sub write_database_conf {
   copy("$conf_dir/database.conf.dist","$conf_dir/database.conf") or die "Can't copy database.conf.dist to database.conf: $!";
 }
 
-sub write_prelocal_conf {
+sub write_site_conf {
   my $conf_dir = shift;
-  open(my $in, "<","$conf_dir/prelocal.conf.dist")
-    or die "Can't open $conf_dir/prelocal.conf.dist for reading: $!";
-  open(my $out, ">", "$conf_dir/prelocal.conf")
-    or die "Can't open $conf_dir/prelocal.conf for writing: $!";
+  open(my $in, "<","$conf_dir/site.conf.dist")
+    or die "Can't open $conf_dir/site.conf.dist for reading: $!";
+  open(my $out, ">", "$conf_dir/site.conf")
+    or die "Can't open $conf_dir/site.conf for writing: $!";
   while( <$in> ) {
     if(/^\$webwork_url/) {
       print $out "\$webwork_url = \"$webwork_url\";\n";
