@@ -318,11 +318,11 @@ EOF
 
 write_database_conf("$webwork_dir/conf");
 
-write_prelocal_conf("$webwork_dir/conf");
+write_site_conf("$webwork_dir/conf");
 
 write_global_conf("$webwork_dir/conf");
 
-write_postlocal_conf("$webwork_dir/conf");
+write_localOverrides_conf("$webwork_dir/conf");
 
 write_webwork_apache2_config("$webwork_dir/conf");
 
@@ -1042,7 +1042,7 @@ sub change_permissions {
 
 sub create_database {
   my ($dsn, $root_pw, $ww_db, $ww_user, $ww_pw) = @_;
-  my $dbh = DBI->connect($dsn, 'root', $root_pw);
+  my $dbh = DBI->connect("dbi:mysql:mysql", 'root', $root_pw);
   print "Connected to mysql as root...\n";
   $dbh -> do("CREATE DATABASE $ww_db") or die "Could not create $ww_db database: $!\n";
   print "Created $ww_db database...\n";
