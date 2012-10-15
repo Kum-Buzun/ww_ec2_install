@@ -1098,12 +1098,12 @@ sub write_global_conf {
   copy("$conf_dir/global.conf.dist","$conf_dir/global.conf") or die "Can't copy global.conf.dist to global.conf: $!";
 }
 
-sub write_postlocal_conf {
+sub write_localOverrides_conf {
   my $conf_dir = shift;
-  open(my $in,"<","$conf_dir/postlocal.conf.dist")
-    or die "Can't open $conf_dir/postlocal.conf.dist for reading: $!";
-  open(my $out,">","$conf_dir/postlocal.conf")
-    or die "Can't open $conf_dir/postlocal.conf for writing: $!";
+  open(my $in,"<","$conf_dir/localOverrides.conf.dist")
+    or die "Can't open $conf_dir/localOverrides.conf.dist for reading: $!";
+  open(my $out,">","$conf_dir/localOverrides.conf")
+    or die "Can't open $conf_dir/localOverrides.conf for writing: $!";
     while( <$in> ) {
       print $out $_;
     }
