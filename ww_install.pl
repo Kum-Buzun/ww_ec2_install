@@ -1104,13 +1104,17 @@ sub write_global_conf {
 
 sub write_localOverrides_conf {
   my $conf_dir = shift;
-  open(my $in,"<","$conf_dir/localOverrides.conf.dist")
+  open(my $in, "<","$conf_dir/localOverrides.conf.dist")
     or die "Can't open $conf_dir/localOverrides.conf.dist for reading: $!";
-  open(my $out,">","$conf_dir/localOverrides.conf")
+  open(my $out, ">", "$conf_dir/localOverrides.conf")
     or die "Can't open $conf_dir/localOverrides.conf for writing: $!";
-    while( <$in> ) {
+  while( <$in> ) {
+  	if (/^\$problemLibrary{root}/) {
+  	  print $out "\$problemLibrary{root} = \"/opt/webwork/libraries/OpenProblemLibrary\";\n";
+    } else {
       print $out $_;
     }
+  }
 }
 
 
