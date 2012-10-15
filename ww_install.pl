@@ -276,22 +276,7 @@ copy_classlist_files($webwork_dir,$webwork_courses_dir);
 copy_model_course($webwork_dir, $webwork_courses_dir);
 
 print<<EOF;
-#######################################################################
-#
-#  Now I'm going to change the ownship and permissions of some directories
-#  under $webwork_dir and $webwork_courses_dir that should be web accessible.  
-#  Faulty permissions is one of the most common cause of problems, especially
-#  after upgrades. 
-# 
-######################################################################
-EOF
-change_grp($server_groupID, $webwork_courses_dir, "$webwork_dir/DATA", "$webwork_dir/htdocs/tmp", "$webwork_dir/logs", "$webwork_dir/tmp");
-change_permissions($server_groupID, "$webwork_courses_dir", "$webwork_dir/DATA", "$webwork_dir/htdocs/tmp", "$webwork_dir/logs", "$webwork_dir/tmp");
 
-#chgrp -R wwdata DATA ../courses htdocs/tmp logs tmp
-# chmod -R g+w DATA ../courses htdocs/tmp logs tmp
-# find DATA/ ../courses/ htdocs/tmp logs/ tmp/ -type d -a ! -name CVS -exec chmod g+s {}
-print<<EOF;
 #######################################################################
 #
 #  Now I'm going to create the webwork mysql database $ww_db. The webwork db
@@ -370,6 +355,23 @@ print<<EOF;
 ######################################################################
 EOF
 create_admin_course();
+print<<EOF;
+
+#######################################################################
+#
+#  Now I'm going to change the ownship and permissions of some directories
+#  under $webwork_dir and $webwork_courses_dir that should be web accessible.  
+#  Faulty permissions is one of the most common cause of problems, especially
+#  after upgrades. 
+# 
+######################################################################
+EOF
+change_grp($server_groupID, $webwork_courses_dir, "$webwork_dir/DATA", "$webwork_dir/htdocs/tmp", "$webwork_dir/logs", "$webwork_dir/tmp");
+change_permissions($server_groupID, "$webwork_courses_dir", "$webwork_dir/DATA", "$webwork_dir/htdocs/tmp", "$webwork_dir/logs", "$webwork_dir/tmp");
+
+#chgrp -R wwdata DATA ../courses htdocs/tmp logs tmp
+# chmod -R g+w DATA ../courses htdocs/tmp logs tmp
+# find DATA/ ../courses/ htdocs/tmp logs/ tmp/ -type d -a ! -name CVS -exec chmod g+s {}
 print<<EOF;
 #######################################################################
 #
