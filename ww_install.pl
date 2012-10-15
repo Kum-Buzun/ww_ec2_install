@@ -357,7 +357,7 @@ unpack_jsMath_fonts();
 print<<EOF;
 #######################################################################
 #
-# Kay. Now I'm going to update the NPL.  This could take a few...
+# Kay. Now I'm going to update the OPL.  This could take a few...
 # 
 ######################################################################
 EOF
@@ -1086,6 +1086,8 @@ sub write_site_conf {
       print $out "\$database_username = \"$database_username\";\n";
     } elsif (/^\#\$database_password/) {
       print $out "\$database_password = \"$database_password\";\n";
+  	} elsif (/^\#\$problemLibrary{root}/) {
+  	  print $out "\$database_password = \"/opt/webwork/libraries/OpenProblemLibrary\";\n";
     } elsif (/^\$externalPrograms{(\w+)}/) {
       next if ($1 =~ /tth/);
         print $out "\$externalPrograms{$1} = \"$$apps{$1}\";\n";
