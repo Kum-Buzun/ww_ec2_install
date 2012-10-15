@@ -1087,7 +1087,7 @@ sub write_site_conf {
     } elsif (/^\$database_password/) {
       print $out "\$database_password = \"$database_password\";\n";
   	} elsif (/^\$problemLibrary{root}/) {
-  	  print $out "\$$problemLibrary{root} = \"/opt/webwork/libraries/OpenProblemLibrary\";\n";
+  	  print $out "\$problemLibrary{root} = \"/opt/webwork/libraries/OpenProblemLibrary\";\n";
     } elsif (/^\$externalPrograms{(\w+)}/) {
       next if ($1 =~ /tth/);
         print $out "\$externalPrograms{$1} = \"$$apps{$1}\";\n";
