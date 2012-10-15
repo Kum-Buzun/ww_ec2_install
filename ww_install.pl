@@ -1139,7 +1139,7 @@ sub configure_shell {
 }
 
 sub symlink_webwork_apache2_config {
-  symlink("$webwork_dir/conf/webwork.apache2-config","$apache{root}/conf.d/webwork.conf");
+  symlink("$webwork_dir/conf/webwork.apache2-config","/etc/apache2/conf.d/webwork.conf");
 # cd /etc/httpd/conf.d
 # ln -s /opt/webwork/webwork2/conf/webwork.apache2-config webwork.conf
 }
