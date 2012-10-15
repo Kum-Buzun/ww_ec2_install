@@ -957,7 +957,7 @@ sub get_webwork {
       print "fetched OPL successfully: $buffer\n";
     }
   chdir "$prefix/libraries";
-  symlink("$prefix/webwork-open-problem-library/OpenProblemLibrary");
+  symlink("$prefix/webwork-open-problem-library/OpenProblemLibrary", "OpenProblemLibrary");
   }
 
 sub copy_classlist_files {
