@@ -1147,7 +1147,7 @@ sub symlink_webwork_apache2_config {
 sub setup_npl {
   chdir("$WW_PREFIX/libraries/NationalProblemLibrary");
   symlink("$WW_PREFIX/libraries/NationalProblemLibrary","$WW_PREFIX/courses/modelCourse/templates/Library");
-  system("$webwork_dir/bin/NPL-UPDATE");
+  system("$webwork_dir/bin/OPL-update");
   #$ cd /opt/webwork/courses/modelCourse/templates/
   #$ sudo ln -s /opt/webwork/libraries/NationalProblemLibrary Library
   #cd /opt/webwork/libraries/NationalProblemLibrary
