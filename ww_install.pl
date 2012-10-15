@@ -169,6 +169,8 @@ my @modulesList = qw(
 	XML::Parser::EasyTree
 	XML::Writer
 	XMLRPC::Lite
+	JSON
+	HTML::Template
 );
 
 # OK, Let's get started....
@@ -945,13 +947,14 @@ sub get_webwork {
   make_path('libraries',{owner=>'root',group=>'root'});
   make_path('courses',{owner=>'root',group=>'root'});
   chdir "$prefix/libraries";
-  my $npl_cmd = $apps->{svn}." checkout http://svn.webwork.maa.org/npl/trunk/NationalProblemLibrary";
+  # my $npl_cmd = $apps->{svn}." checkout http://svn.webwork.maa.org/npl/trunk/NationalProblemLibrary";
+  my $npl_cmd = $apps->{git}." clone git://github.com/openwebwork/webwork-open-problem-library.git NationalProblemLibrary";
   if( scalar run( command => $npl_cmd,
   verbose => 1,
   buffer => \$buffer,
   timeout => 6000 )
   ) {
-      print "fetched npl successfully: $buffer\n";
+      print "fetched OPL successfully: $buffer\n";
     }
   }
 
