@@ -194,8 +194,8 @@ $siteDefaults{timezone} = $envir{timezone};
 
 #Get apache version, path to config file, server user and group;
 my %apache = check_apache();
-my $server_userID = $apache{user};
-my $server_groupID = $apache{group};
+my $server_userID = "www-data";
+my $server_groupID = "www-data";
 
 #Check perl prerequisites
 print<<EOF;
@@ -361,7 +361,7 @@ print<<EOF;
 # 
 ######################################################################
 EOF
-setup_npl();
+setup_opl();
 print<<EOF;
 #######################################################################
 #
@@ -946,9 +946,9 @@ sub get_webwork {
     }
   make_path('libraries',{owner=>'root',group=>'root'});
   make_path('courses',{owner=>'root',group=>'root'});
-  chdir "$prefix/libraries";
+  chdir "$prefix/";
   # my $npl_cmd = $apps->{svn}." checkout http://svn.webwork.maa.org/npl/trunk/NationalProblemLibrary";
-  my $npl_cmd = $apps->{git}." clone git://github.com/openwebwork/webwork-open-problem-library.git NationalProblemLibrary";
+  my $npl_cmd = $apps->{git}." clone git://github.com/openwebwork/webwork-open-problem-library.git";
   if( scalar run( command => $npl_cmd,
   verbose => 1,
   buffer => \$buffer,
@@ -956,6 +956,8 @@ sub get_webwork {
   ) {
       print "fetched OPL successfully: $buffer\n";
     }
+  chdir "$prefix/libraries";
+  symlink("$prefix/webwork-open-problem-library/OpenProblemLibrary");
   }
 
 sub copy_classlist_files {
@@ -1144,9 +1146,9 @@ sub symlink_webwork_apache2_config {
 # ln -s /opt/webwork/webwork2/conf/webwork.apache2-config webwork.conf
 }
 
-sub setup_npl {
-  chdir("$WW_PREFIX/libraries/NationalProblemLibrary");
-  symlink("$WW_PREFIX/libraries/NationalProblemLibrary","$WW_PREFIX/courses/modelCourse/templates/Library");
+sub setup_opl {
+  chdir("$WW_PREFIX/libraries/OpenProblemLibrary");
+  symlink("$WW_PREFIX/libraries/OpenProblemLibrary","$WW_PREFIX/courses/modelCourse/templates/Library");
   system("$webwork_dir/bin/OPL-update");
   #$ cd /opt/webwork/courses/modelCourse/templates/
   #$ sudo ln -s /opt/webwork/libraries/NationalProblemLibrary Library
