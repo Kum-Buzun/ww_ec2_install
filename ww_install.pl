@@ -1084,10 +1084,10 @@ sub write_site_conf {
       print $out "\$database_dsn = \"$database_dsn\";\n";
     } elsif (/^\$database_username/) {
       print $out "\$database_username = \"$database_username\";\n";
-    } elsif (/^\#\$database_password/) {
+    } elsif (/^\$database_password/) {
       print $out "\$database_password = \"$database_password\";\n";
-  	} elsif (/^\#\$problemLibrary{root}/) {
-  	  print $out "\$database_password = \"/opt/webwork/libraries/OpenProblemLibrary\";\n";
+  	} elsif (/^\$problemLibrary{root}/) {
+  	  print $out "\$$problemLibrary{root} = \"/opt/webwork/libraries/OpenProblemLibrary\";\n";
     } elsif (/^\$externalPrograms{(\w+)}/) {
       next if ($1 =~ /tth/);
         print $out "\$externalPrograms{$1} = \"$$apps{$1}\";\n";
